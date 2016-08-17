@@ -66,10 +66,12 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-   # Defines a proto-feed.
-  # See "Following users" for the full implementation.
+  # Returns a user's status feed.
   def feed
-    Micropost.where("user_id = ?", id)
+        Mfollowing_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
   # Follows a user.
   def follow(other_user)
