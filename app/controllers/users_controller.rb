@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
-      render 'new'
+      render "new"
     end
   end
   def edit
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       # Handle a successful update.
     else
-      render 'edit'
+      render "edit"
     end
   end
   def destroy
